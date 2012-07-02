@@ -1,0 +1,15 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uilds/
+
+*.csproj
+*.vcproject
+*.unityproj
+*.sln
+*.exe
+*.app
+*.pidb
+.DS_Store
+Thumbs.db
+Desktop.ini
