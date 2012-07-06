@@ -10,6 +10,7 @@ public class EnemiesPath : MonoBehaviour
 	public int currentTarget=0;
 	private GameObject lasttarget;
 	public GameObject[] targets;
+	private float distance = 5f;
 	// Use this for initialization
 	void Start ()
 	{
@@ -19,6 +20,16 @@ public class EnemiesPath : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		Ray ray = new Ray(transform.position,new Vector3(0,0,1));
+		RaycastHit hit;
+		if (Physics.Raycast(ray,out hit, distance)){
+			Debug.Log(hit.collider.tag);
+			if (hit.collider.tag=="Player"){
+				PlayerIsVisible=true;
+			}else{
+				PlayerIsVisible=false;
+			}
+		}
 		if (PlayerIsAttackable || PlayerIsVisible) {
 			GameObject player = GameObject.FindGameObjectWithTag ("Player");
 			lasttarget = player;
@@ -49,7 +60,7 @@ public class EnemiesPath : MonoBehaviour
 					currentTarget = 0;
 				}
 			}
-			Debug.Log("I'm going");
+			//Debug.Log("I'm going");
 			transform.position += nextStep * Time.deltaTime;
 		}		
 	}
