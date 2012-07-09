@@ -13,6 +13,11 @@ public class MovePiston : MonoBehaviour
 	void Start ()
 	{
 		pisty = transform.Find ("Pisty");
+		CharacterControllerPusher ccp = pisty.GetComponent<CharacterControllerPusher> ();
+		if (ccp!= null)
+		{
+			ccp.pushSpeed = rate * 0.002f;
+		}
 	}
 	
 	// Update is called once per frame
