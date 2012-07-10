@@ -1,4 +1,5 @@
 private var motor : CharacterMotor;
+	var lastDirectionVector = new Vector3(0, 0, 0);
 
 // Use this for initialization
 function Awake () {
@@ -25,11 +26,26 @@ function Update () {
 		
 		// Multiply the normalized direction vector by the modified length
 		directionVector = directionVector * directionLength;
+		
+	 
+		
+		
 	}
 	
 	// Apply the direction to the CharacterMotor
-	motor.inputMoveDirection = transform.rotation * directionVector;
+	
+	motor.inputMoveDirection = /*transform.rotation */ directionVector;
+	
+	if (directionVector != Vector3.zero) {
+		lastDirectionVector = directionVector;
+	}
+//	print("directionVector: " + directionVector + ", lastDirectionVector: " + lastDirectionVector);
+
 	motor.inputJump = Input.GetButton("Jump");
+	transform.rotation = Quaternion.Slerp(transform.rotation, (Quaternion.FromToRotation(Vector3.right, lastDirectionVector) * Quaternion.Euler(0, 90, 0)), 10f * Time.deltaTime);
+	
+	//Vector3 posMr = transform.position;
+	  //  posMr.z = - posMr.z;
 }
 
 // Require a character controller to be attached to the same game object
