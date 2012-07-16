@@ -10,8 +10,7 @@ public class EnemiesPath : MonoBehaviour
 	public int currentTarget=0;
 	private GameObject lasttarget;
 	public GameObject[] targets;
-	private float distance = 5f;
-	// Use this for initialization
+		// Use this for initialization
 	void Start ()
 	{
 		currentTarget=GetNearlyPoint();
